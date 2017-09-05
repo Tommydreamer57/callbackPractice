@@ -99,7 +99,7 @@ uniq(names, function(uniqArr){
 
     //Code Here 
 
-var each = (arr,cb) => arr.map(cb);
+var each = (arr,cb) => arr.map((e, i) => cb(e, i));
 
 
 each(names, function(item, index){
