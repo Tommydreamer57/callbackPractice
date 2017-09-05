@@ -23,7 +23,7 @@ and what you should write is the sayHi function that makes the code above work,
 // 1. Write a function called first that returns the first item of the array using a callback function
 
   // Code Here
-
+var first = (arr,cb) => cb(arr[0]);
   
 var names = ['Tyler', 'Cahlan', 'Ryan', 'Colt', 'Tyler', 'Blaine', 'Cahlan'];
 first(names, function(firstName){
@@ -37,7 +37,7 @@ first(names, function(firstName){
 
   //Code Here
 
-
+var last = (arr,cb) => cb(arr[arr.length-1]);
 
 last(names, function(lastName){
   console.log('The last name in names is ' + lastName);
@@ -49,7 +49,7 @@ last(names, function(lastName){
 // 3. Write a function called multiply that multiplies two numbers. Invoke the callback with the result of the multiplication. 
 
   //Code Here
-
+var multiply = (a,b,cb) => cb(a*b);
 
 
 multiply(4, 3, function(answer){
@@ -64,7 +64,7 @@ multiply(4, 3, function(answer){
 
   //Code Here 
 
-
+var contains = (arr,name,cb) => arr.indexOf(name)===-1 ? cb(false) : cb(true);
 
 
 contains(names, 'Colt', function(result){
@@ -82,7 +82,13 @@ contains(names, 'Colt', function(result){
 
   //Code Here
 
-
+var uniq = (names, cb) => {
+  var newNames = [];
+  for (let i = 0; i < names.length; i++) {
+    newNames.indexOf(names[i]) === -1 ? newNames.push(names[i]) : newNames = newNames;
+  }
+  return cb(newNames);
+}
 
 uniq(names, function(uniqArr){
   console.log('The new names array with all the duplicate items removed is ', uniqArr);
@@ -93,10 +99,11 @@ uniq(names, function(uniqArr){
 
     //Code Here 
 
+var each = (arr,cb) => arr.map(cb);
 
 
-each(names, function(item, indice){
-  console.log('The item in the ' + indice + ' position is ' + item)
+each(names, function(item, index){
+  console.log('The item in the ' + index + ' position is ' + item)
 });
 
 
@@ -106,7 +113,13 @@ each(names, function(item, indice){
 
 // Code here
 
-
+var getUserById = (arr, id, cb) => {
+  for (var i = 0; i < arr.length; i++) {
+    for (var prop in arr[i]) {
+      arr[i][prop] === id ? cb(arr[i]) : i = i;
+    }
+  }
+}
 
 var users = [
   {
